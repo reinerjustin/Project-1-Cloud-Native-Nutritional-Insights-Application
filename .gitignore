@@ -1,0 +1,22 @@
+# Python environments
+.venv/
+**/.venv/
+
+# Python generated files
+__pycache__/
+*.pyc
+.python_packages/
+
+# Azure local configuration
+local.settings.json
+**/local.settings.json
+
+# Environment secrets
+.env
+.env.*
+
+# Azurite local data
+.azurite/
+
+# Editor files
+.vscode/

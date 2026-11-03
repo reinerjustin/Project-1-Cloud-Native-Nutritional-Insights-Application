@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="NutriScope - Cloud-based nutritional insights dashboard">
+
+    <title>NutriScope | Nutritional Insights Dashboard</title>
+
+    <!-- Dashboard styling -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Chart.js library -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"
+        defer>
+    </script>
+
+    <!-- Application configuration -->
+    <script src="config.js" defer></script>
+
+    <!-- Dashboard functionality -->
+    <script src="app.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    N
+                </div>
+
+                <div>
+                    <h1>NutriScope</h1>
+
+                    <p>Nutritional Insights Platform</p>
+                </div>
+
+            </div>
+
+            <div class="header-actions">
+
+                <span id="connectionStatus"
+                      class="status-badge">
+                    Loading...
+                </span>
+
+                <button id="refreshButton"
+                        class="refresh-button">
+
+                    Refresh Data
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN DASHBOARD
+    ====================================== -->
+
+    <main class="dashboard-container">
+
+        <!-- PAGE INTRODUCTION -->
+
+        <section class="page-intro">
+
+            <div>
+
+                <p class="eyebrow">
+                    CLOUD ANALYTICS
+                </p>
+
+                <h2>Nutritional Insights Dashboard</h2>
+
+                <p class="intro-description">
+
+                    Explore nutritional statistics,
+                    compare diet types, and discover
+                    protein-rich recipes.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SUMMARY CARDS
+        ====================================== -->
+
+        <section class="summary-grid">
+
+            <!-- Total Recipes -->
+
+            <article class="summary-card">
+
+                <div class="card-label">
+                    Total Recipes
+                </div>
+
+                <div id="totalRecipes"
+                     class="card-value">
+                    --
+                </div>
+
+                <div class="card-description">
+                    Recipes analyzed
+                </div>
+
+            </article>
+
+
+            <!-- Highest Protein Diet -->
+
+            <article class="summary-card">
+
+                <div class="card-label">
+                    Highest Protein Diet
+                </div>
+
+                <div id="highestProteinDiet"
+                     class="card-value">
+                    --
+                </div>
+
+                <div id="highestProteinValue"
+                     class="card-description">
+                    Average protein: --
+                </div>
+
+            </article>
+
+
+            <!-- Function Execution Time -->
+
+            <article class="summary-card">
+
+                <div class="card-label">
+                    Function Execution Time
+                </div>
+
+                <div id="executionTime"
+                     class="card-value">
+                    --
+                </div>
+
+                <div class="card-description">
+                    Backend processing time
+                </div>
+
+            </article>
+
+
+            <!-- Missing Values -->
+
+            <article class="summary-card">
+
+                <div class="card-label">
+                    Missing Values Handled
+                </div>
+
+                <div id="missingValues"
+                     class="card-value">
+                    --
+                </div>
+
+                <div class="card-description">
+                    Nutritional values filled
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================
+             FILTER CONTROLS
+        ====================================== -->
+
+        <section class="controls-panel">
+
+            <div class="filter-control">
+
+                <label for="dietFilter">
+                    Filter by Diet Type
+                </label>
+
+                <select id="dietFilter">
+
+                    <option value="all">
+                        All Diet Types
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="dataset-information">
+
+                <span class="dataset-label">
+                    DATASET
+                </span>
+
+                <span id="datasetName">
+                    All_Diets.csv
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ERROR MESSAGE
+        ====================================== -->
+
+        <div id="errorMessage"
+             class="error-message"
+             role="alert"
+             hidden>
+
+        </div>
+
+
+        <!-- =====================================
+             VISUALIZATION 1
+             AVERAGE MACRONUTRIENTS
+        ====================================== -->
+
+        <section class="chart-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        NUTRITIONAL COMPARISON
+                    </p>
+
+                    <h3>Average Macronutrients by Diet</h3>
+
+                    <p>
+                        Compare protein, carbohydrates,
+                        and fat across different diet types.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="chart-container">
+
+                <canvas id="macroChart"
+                        aria-label="Average macronutrients by diet type"
+                        role="img">
+                </canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SECOND ROW OF VISUALIZATIONS
+        ====================================== -->
+
+        <section class="charts-grid">
+
+
+            <!-- VISUALIZATION 2
+                 RECIPE DISTRIBUTION -->
+
+            <article class="chart-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            RECIPE DISTRIBUTION
+                        </p>
+
+                        <h3>Recipes by Diet Type</h3>
+
+                        <p>
+                            Distribution of recipes
+                            across diet categories.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container chart-container-small">
+
+                    <canvas id="distributionChart"
+                            aria-label="Recipe distribution by diet type"
+                            role="img">
+                    </canvas>
+
+                </div>
+
+            </article>
+
+
+            <!-- VISUALIZATION 3
+                 PROTEIN SCATTER PLOT -->
+
+            <article class="chart-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            PROTEIN ANALYSIS
+                        </p>
+
+                        <h3>Protein vs. Carbohydrates</h3>
+
+                        <p>
+                            Compare the nutritional
+                            composition of top recipes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container chart-container-small">
+
+                    <canvas id="scatterChart"
+                            aria-label="Protein versus carbohydrates scatter plot"
+                            role="img">
+                    </canvas>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================
+             TOP PROTEIN RECIPES TABLE
+        ====================================== -->
+
+        <section class="table-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        RECIPE EXPLORER
+                    </p>
+
+                    <h3>Top Protein-Rich Recipes</h3>
+
+                    <p>
+                        Explore recipes with high
+                        protein content.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Recipe</th>
+
+                            <th>Diet Type</th>
+
+                            <th>Cuisine</th>
+
+                            <th>Protein (g)</th>
+
+                            <th>Carbs (g)</th>
+
+                            <th>Fat (g)</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recipeTableBody">
+
+                        <tr>
+
+                            <td colspan="6"
+                                class="empty-table">
+
+                                Loading recipe information...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             DATA METADATA
+        ====================================== -->
+
+        <section class="metadata-panel">
+
+            <div>
+
+                <span class="metadata-label">
+                    LAST UPDATED
+                </span>
+
+                <p id="lastUpdated">
+                    Not available
+                </p>
+
+            </div>
+
+            <div>
+
+                <span class="metadata-label">
+                    DATA SOURCE
+                </span>
+
+                <p id="dataSource">
+                    All_Diets.csv
+                </p>
+
+            </div>
+
+            <div>
+
+                <span class="metadata-label">
+                    ENVIRONMENT
+                </span>
+
+                <p id="environment">
+                    Initializing
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+        <p>
+            NutriScope | Cloud-Native Nutritional
+            Insights Application
+        </p>
+
+        <p>
+            Powered by Python, Azure Functions
+            and Chart.js
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

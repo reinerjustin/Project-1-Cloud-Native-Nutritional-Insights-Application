@@ -1,0 +1,9 @@
+azure-functions
+azure-identity
+azure-storage-blob
+pandas
+
+# ef: aka.ms/functions-azure-monitor-python 
+# azure-monitor-opentelemetry 
+
+azure-functions

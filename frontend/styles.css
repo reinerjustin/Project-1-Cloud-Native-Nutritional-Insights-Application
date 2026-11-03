@@ -1,0 +1,611 @@
+/* =========================================
+   1. GLOBAL SETTINGS
+========================================= */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+
+    --background: #f5f7fb;
+    --surface: #ffffff;
+
+    --text-primary: #172033;
+    --text-secondary: #64748b;
+
+    --border: #e2e8f0;
+
+    --success: #15803d;
+    --success-light: #dcfce7;
+
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+
+    --shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+button,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================
+   2. HEADER
+========================================= */
+
+.header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 5%;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 23px;
+    font-weight: bold;
+
+    border-radius: 12px;
+}
+
+.brand h1 {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.brand p {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+/* =========================================
+   3. CONNECTION STATUS
+========================================= */
+
+.status-badge {
+    padding: 7px 12px;
+
+    background: var(--primary-light);
+    color: var(--primary-dark);
+
+    font-size: 12px;
+    font-weight: bold;
+
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   4. REFRESH BUTTON
+========================================= */
+
+.refresh-button {
+    background: var(--primary);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 18px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition: background 0.2s ease;
+}
+
+.refresh-button:hover {
+    background: var(--primary-dark);
+}
+
+.refresh-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   5. MAIN CONTAINER
+========================================= */
+
+.dashboard-container {
+    max-width: 1400px;
+
+    margin: 35px auto;
+    padding: 0 5%;
+}
+
+
+/* =========================================
+   6. PAGE INTRODUCTION
+========================================= */
+
+.page-intro {
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 8px;
+}
+
+.page-intro h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.intro-description {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+
+/* =========================================
+   7. SUMMARY CARDS
+========================================= */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.summary-card {
+    background: var(--surface);
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    transition: transform 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+.card-label {
+    color: var(--text-secondary);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 12px;
+}
+
+.card-value {
+    font-size: 27px;
+    font-weight: 700;
+
+    color: var(--primary);
+
+    margin-bottom: 5px;
+    overflow-wrap: anywhere;
+}
+
+.card-description {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+
+/* =========================================
+   8. FILTER CONTROLS
+========================================= */
+
+.controls-panel {
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 18px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.filter-control {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.filter-control label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.filter-control select {
+    min-width: 220px;
+
+    padding: 10px 12px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    color: var(--text-primary);
+    font-size: 13px;
+
+    outline: none;
+}
+
+.filter-control select:focus {
+    border-color: var(--primary);
+}
+
+.dataset-information {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    text-align: right;
+}
+
+.dataset-label {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#datasetName {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   9. ERROR MESSAGE
+========================================= */
+
+.error-message {
+    padding: 14px 18px;
+
+    background: var(--danger-light);
+    color: var(--danger);
+
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   10. CHART SECTIONS
+========================================= */
+
+.chart-section {
+    background: var(--surface);
+
+    padding: 24px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    min-width: 0;
+}
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.section-heading p:not(.eyebrow) {
+    color: var(--text-secondary);
+
+    font-size: 12px;
+}
+
+.chart-container {
+    position: relative;
+
+    width: 100%;
+    height: 350px;
+}
+
+.chart-container-small {
+    height: 300px;
+}
+
+
+/* =========================================
+   11. CHART GRID
+========================================= */
+
+.charts-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-top: 22px;
+}
+
+
+/* =========================================
+   12. RECIPE TABLE
+========================================= */
+
+.table-section {
+    background: var(--surface);
+
+    padding: 24px;
+
+    margin-top: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 700px;
+}
+
+thead {
+    background: var(--background);
+}
+
+th {
+    padding: 14px;
+
+    text-align: left;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 14px;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 12px;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+td:first-child {
+    font-weight: 600;
+}
+
+.empty-table {
+    text-align: center;
+
+    padding: 30px;
+
+    color: var(--text-secondary);
+}
+
+
+/* =========================================
+   13. METADATA PANEL
+========================================= */
+
+.metadata-panel {
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 20px;
+
+    margin-top: 22px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.metadata-label {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.metadata-panel p {
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   14. FOOTER
+========================================= */
+
+.footer {
+    background: var(--surface);
+
+    border-top: 1px solid var(--border);
+
+    text-align: center;
+
+    padding: 25px 15px;
+
+    margin-top: 40px;
+}
+
+.footer p {
+    font-size: 12px;
+    color: var(--text-secondary);
+
+    margin: 4px 0;
+}
+
+
+/* =========================================
+   15. RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .header-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .page-intro h2 {
+        font-size: 24px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .controls-panel {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dataset-information {
+        text-align: left;
+    }
+
+    .filter-control,
+    .filter-control select {
+        width: 100%;
+    }
+
+    .metadata-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        height: 280px;
+    }
+
+    .chart-container-small {
+        height: 260px;
+    }
+
+}
